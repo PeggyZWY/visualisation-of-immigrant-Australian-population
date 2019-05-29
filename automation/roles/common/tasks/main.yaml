@@ -1,0 +1,33 @@
+- name: Install pip3
+  become: yes
+  apt:
+    name: python3-pip
+    state: latest
+
+- name: Install Docker
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - docker.io
+
+- name: Install python dependency
+  become: yes
+  command: pip3 install {{item}}
+  with_items:
+    - CouchDB==1.2
+    - pytz==2018.4
+    - Flask==0.10.1
+    - Jinja2==2.7.3
+    - MarkupSafe==0.23
+    - Werkzeug==0.10.4
+    - argparse==1.2.1
+    - itsdangerous==0.24
+    - requests==2.21.0
+
+- name: Create CouchDB in docker
+  become: yes
+  command: "{{ item }}"
+  with_items:
+    - docker run -d -p 5984:5984 -e COUCHDB_USER=wenyi -e COUCHDB_PASSWORD=cloud -v /webserver:/opt/couchdb/data --name mycouchdb apache/couchdb

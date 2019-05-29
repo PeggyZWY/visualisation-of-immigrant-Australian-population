@@ -1,0 +1,9 @@
+- hosts: dbserver1
+  sudo: yes
+  roles:
+     - install-replica1
+
+- hosts: dbserver2
+  sudo: yes
+  roles:
+     - install-replica2
