@@ -10,19 +10,29 @@
 </head>
 <body>
     <div id="map"></div>
+
+
     <div id="zoom">
         <button id="reset-zoom">↻</button>
         <button id="zoom-in">+</button>
         <button id="zoom-out">-</button>
-        <button id="ajaxTest">ajaxTest</button>
-        <button id="auMap">auMap</button>
-        <button id="statesMap">statesMap</button>
-        <button id="flaskAjax">flaskAjax</button>
     </div>
-    <button id="choose-area-button">Choose Origin and Australia Area</button>
+
+
+    <button id="choose-area-button">Choose Australian Area</button>
+    <a href="/estimation" target="_blank">
+        <button id="go-to-estimation">
+            See Immigration Estimation
+        </button>
+    </a>
+    <button id="go-to-cartogram">See Cartogram</button>
+
     <div id="choose-area-panel">
         <div href="#" id="close"></div>
         <form>
+
+
+<div style="display: none">
             <span>Origin</span>
             <label for="origin-category">Category</label>
             <select id="origin-category" name="origin-category">
@@ -31,21 +41,27 @@
               <option value="world">whole world</option>
             </select>
 
-            <label for="origin-name">Name</label>
+            <label for="origin-name" id='testla'>Name</label>
             <input type="text" id="origin-name" name="origin-name">
 
+
             <div class="divide"></div>
+</div>
 
             <span>Australia</span>
             <label for="au-category">Category</label>
             <select id="au-category" name="au-category">
-                <option value="country">country</option>
+                <option value="country">whole Australia</option>
                 <option value="state">state</option>
-                <option value="SA2">SA2 Area</option>
+                <option value="sa2">SA2 Area</option>
             </select>
 
             <label for="au-name">Name</label>
-            <input type="text" id="au-name" name="au-name">
+            <!--input type="text" id="au-name" name="au-name"-->
+
+            <input type="text" list="au-name-options" id="au-name" name="au-name">
+            <datalist id="au-name-options">
+            </datalist>
 
             <input id="choose-panel-confirm" type="button" value="Confirm">
             <input id="choose-panel-close" type="button" value="Close">
@@ -64,8 +80,10 @@
                   fill="currentColor" class="octo-body"></path>
         </svg>
     </a>
+    <script src="/static/map/capital_new.js"></script>
     <script src="/static/map/world.min.js"></script>
     <script src="/static/map/states.min.js"></script>
-    <script src="/static/js/map.js"></script>
+    <script src="/static/js/map01to16.js"></script>
+    <script src="/static/map/sa2_dict.js"></script>
 </body>
 </html>

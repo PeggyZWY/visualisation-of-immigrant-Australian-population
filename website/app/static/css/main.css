@@ -1,72 +1,86 @@
 /* zoom panel start */
 #zoom {
-    position: absolute;
-    top: 100px;
-    right: 20px;
-    color: white;
+  position: absolute;
+  top: 100px;
+  right: 20px;
+  color: white;
 }
 
 #zoom button {
-    display: block;
-    color: #555555;
-    font-size: 20px;
-    font-weight: bold;
-    width: 30px;
-    height: 30px;
-    box-shadow: 0 0 8px #666666;
-    overflow: hidden;
+  display: block;
+  color: #555555;
+  font-size: 20px;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  box-shadow: 0 0 8px #666666;
+  overflow: hidden;
 }
 
 #zoom button:hover {
-    color: black;
-    background-color: #cccccc;
-    cursor: pointer;
+  color: black;
+  background-color: #cccccc;
+  cursor: pointer;
 }
 
 #reset-zoom {
-    margin-bottom: 6px;
+  margin-bottom: 6px;
 }
+
 /* zoom panel end */
 
-
-
-
 /* choose area start */
-#choose-area-button {
-    position: absolute;
-    top: 55px;
-    left: 20px;
-    padding: 6px 10px;
-    border-radius: 5px;
-    text-align: center;
-    display: block;
-    color: #555555;
-    background-color: #FFF8DC;
-    font-size: 18px;
-    font-weight: bold;
-    box-shadow: 0 0 8px #666666;
+#choose-area-button, #go-to-estimation, #go-to-cartogram {
+  position: absolute;
+  top: 55px;
+  left: 20px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  text-align: center;
+  display: block;
+  color: #555555;
+  background-color: #FFF8DC;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 0 8px #666666;
+}
+
+#go-to-estimation {
+  top: 100px;
+  background-color: rgb(202, 232, 182);
+}
+
+#go-to-cartogram {
+  top: 145px;
+  background-color: rgb(202, 232, 182);
 }
 
 #choose-area-button:hover {
-    color: black;
-    background-color: #FFFACD;
-    cursor: pointer;
+  color: black;
+  background-color: #FFFACD;
+  cursor: pointer;
+}
+
+#go-to-estimation:hover, #go-to-cartogram:hover {
+  background-color: rgb(161, 217, 185);
+  cursor: pointer;
 }
 
 #choose-area-panel {
-    visibility: hidden;
-    position: absolute;
-    top: 55px;
-    left: 20px;
-    padding: 20px;
-    width: 300px;
-    border-radius: 5px;
-    display: block;
-    color: #333;
-    background-color: #f2f2f2;
-    font-size: 16px;
-    font-weight: bold;
-    box-shadow: 0 0 8px #666666;
+  visibility: hidden;
+  position: absolute;
+  z-index: 10;
+  top: 55px;
+  left: 20px;
+  padding: 20px;
+  width: 300px;
+  border-radius: 5px;
+  display: block;
+  color: #333;
+  background-color: #f2f2f2;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 0 8px #666666;
 }
 
 input[type=text], select {
@@ -82,44 +96,48 @@ input[type=text], select {
 }
 
 input[type=button] {
-    width: 45%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin-top: 8px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  width: 45%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 #choose-panel-confirm {
-    float: left;
+  float: left;
 }
 
 #choose-panel-confirm:hover {
-    background-color: #45a049;
+  background-color: #45a049;
 }
 
 #choose-panel-close {
-    float: right;
-    background-color: #ccc;
-    color: #555;
+  float: right;
+  background-color: #ccc;
+  color: #555;
 }
 
 #choose-panel-close:hover {
-    background-color: #bbb;
-    color: #222;
+  background-color: #bbb;
+  color: #222;
 }
 
 .divide {
-    border: 1px solid #ddd;
-    margin: 10px 0;
+  border: 1px solid #ddd;
+  margin: 10px 0;
 }
 
 #choose-area-panel span {
-    display: block;
-    font-size: 22px;
-    margin-bottom: 10px;
+  display: block;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+[readonly="readonly"] {
+  cursor: not-allowed;
 }
 
 /* close symbol (×) start */
@@ -131,10 +149,12 @@ input[type=button] {
   height: 25px;
   opacity: 0.5;
 }
+
 #close:hover {
   opacity: 1;
   cursor: pointer;
 }
+
 #close:before, #close:after {
   position: absolute;
   left: 15px;
@@ -143,46 +163,94 @@ input[type=button] {
   width: 2px;
   background-color: #333;
 }
+
 #close:before {
   transform: rotate(45deg);
 }
+
 #close:after {
   transform: rotate(-45deg);
 }
+
 /* close symbol (×) end */
+
 /* choose area end */
-
-
 
 /* github corner start */
 .github-corner:hover .octo-arm {
-    animation: octocat-wave 560ms ease-in-out
+  animation: octocat-wave 560ms ease-in-out
 }
 
 @keyframes octocat-wave {
-    0%, 100% {
-        transform: rotate(0)
-    }
+  0%, 100% {
+    transform: rotate(0)
+  }
 
-    20%, 60% {
-        transform: rotate(-25deg)
-    }
+  20%, 60% {
+    transform: rotate(-25deg)
+  }
 
-    40%, 80% {
-        transform: rotate(10deg)
-    }
+  40%, 80% {
+    transform: rotate(10deg)
+  }
 
 }
 
 @media (max-width:500px) {
-    .github-corner:hover .octo-arm {
-        animation: none
-    }
+  .github-corner:hover .octo-arm {
+    animation: none
+  }
 
-    .github-corner .octo-arm {
-        animation: octocat-wave 560ms ease-in-out
-    }
+  .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out
+  }
 
 }
+
 /* github corner end */
 
+/* info box start */
+#info-box {
+  position: absolute;
+  z-index: 1;
+  bottom: 30px;
+  left: 20px;  /* padding-left: 20px; */
+  width: 300px;
+  border-radius: 5px;
+  display: block;  /* color: #333; */
+  color: white;
+  -webkit-text-stroke: 0.2px black;  /* background-color: rgba(223, 223, 223, 0.5); */
+  font-size: 16px;  /* box-shadow: 0 0 8px #666666; */
+}
+
+#info-box div {
+  padding-left: 20px;
+  line-height: 20px;
+}
+
+#info-box .info-title {
+  padding-left: 0;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 24px;
+}
+
+/* info box end */
+#estimation-wrapper {
+
+  /* background-color: red; */
+  position: relative;
+  padding-top: 30px;
+}
+
+#estimation-line-chart {
+
+  /* background-color: yellow; */
+  position: absolute;
+  top: 50%;
+  left: 50%;  /*定位margin-left:50%的位置*/
+  -webkit-transform: translate(-50%, -50%); /*Safari,Chrome*/
+  -moz-transform: translate(-50%, -50%);  /*IE9+*/
+  transform: translate(-50%, -50%); /*使元素本身向左移动宽度的一半*/
+  margin: 0 auto;
+}

@@ -759,7 +759,7 @@ var worldJson = {
             ]
         },
         "properties": {
-            "name": "Aland",
+            "name": "Aland Is.",
             "childNum": 2
         }
     }, {
@@ -1276,7 +1276,7 @@ var worldJson = {
             ]
         },
         "properties": {
-            "name": "Antigua and Barb.",
+            "name": "Antigua and Barbuda",
             "childNum": 1
         }
     }, {
@@ -2865,7 +2865,7 @@ var worldJson = {
             ]
         },
         "properties": {
-            "name": "Bosnia and Herz.",
+            "name": "Bosnia and Herzegovina",
             "childNum": 1
         }
     }, {
@@ -9178,7 +9178,7 @@ var worldJson = {
             ]
         },
         "properties": {
-            "name": "Dem. Rep. Congo",
+            "name": "Democratic Republic of the Congo",
             "childNum": 1
         }
     }, {
@@ -9262,7 +9262,7 @@ var worldJson = {
             ]
         },
         "properties": {
-            "name": "Congo",
+            "name": "Republic of the Congo",
             "childNum": 1
         }
     }, {
@@ -9548,7 +9548,7 @@ var worldJson = {
             ]
         },
         "properties": {
-            "name": "Cape Verde",
+            "name": "Cabo Verde",
             "childNum": 8
         }
     }, {
@@ -9724,7 +9724,7 @@ var worldJson = {
             ]
         },
         "properties": {
-            "name": "Curaçao",
+            "name": "Curacao",
             "childNum": 1
         }
     }, {
@@ -12667,7 +12667,7 @@ var worldJson = {
             ]
         },
         "properties": {
-            "name": "Eq. Guinea",
+            "name": "Equatorial Guinea",
             "childNum": 2
         }
     }, {
@@ -18295,7 +18295,7 @@ var worldJson = {
             ]
         },
         "properties": {
-            "name": "Korea",
+            "name": "South Korea",
             "childNum": 7
         }
     }, {
@@ -18599,7 +18599,7 @@ var worldJson = {
             ]
         },
         "properties": {
-            "name": "Lao PDR",
+            "name": "Laos",
             "childNum": 1
         }
     }, {
@@ -19574,7 +19574,7 @@ var worldJson = {
             ]
         },
         "properties": {
-            "name": "Macedonia",
+            "name": "The former Yugoslav Republic of Macedonia",
             "childNum": 1
         }
     }, {
@@ -24119,7 +24119,7 @@ var worldJson = {
             ]
         },
         "properties": {
-            "name": "Dem. Rep. Korea",
+            "name": "North Korea",
             "childNum": 1
         }
     }, {
@@ -27192,7 +27192,7 @@ var worldJson = {
             ]
         },
         "properties": {
-            "name": "Saint Helena",
+            "name": "St. Helena",
             "childNum": 1
         }
     }, {
@@ -31380,7 +31380,7 @@ var worldJson = {
             ]
         },
         "properties": {
-            "name": "St. Vin. and Gren.",
+            "name": "St Vincent and the Grenadines",
             "childNum": 1
         }
     }, {

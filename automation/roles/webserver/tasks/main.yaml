@@ -1,24 +1,24 @@
-- name: download docker-compose
+- name: Download docker-compose
   shell: "{{item}}"
   with_items:
     - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 
-- name: modify authentication
+- name: Modify authentication
   shell: "{{item}}"
   with_items:
     - sudo chmod +x /usr/local/bin/docker-compose
 
 
-- name: clone harvester git repo
+- name: Clone git repo
   git:
     repo: https://github.com/PeggyZWY/visualisation-of-immigrant-Australian-population.git
     dest: /home/ubuntu/visualisation-github
 
 
-- name: launch website
+- name: Launch website
   shell: "{{item}}"
   args:
     chdir: /home/ubuntu/visualisation-github/website
   with_items:
-    - sudo nohup docker-compose up
+    - sudo docker-compose up
