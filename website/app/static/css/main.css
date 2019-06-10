@@ -66,7 +66,7 @@
   cursor: pointer;
 }
 
-#choose-area-panel {
+#choose-area-panel, #choose-area-panel-cartogram {
   visibility: hidden;
   position: absolute;
   z-index: 10;
@@ -130,7 +130,7 @@ input[type=button] {
   margin: 10px 0;
 }
 
-#choose-area-panel span {
+#choose-area-panel span, #choose-area-panel-cartogram span {
   display: block;
   font-size: 22px;
   margin-bottom: 10px;
@@ -209,33 +209,11 @@ input[type=button] {
 
 /* github corner end */
 
-/* info box start */
-#info-box {
-  position: absolute;
-  z-index: 1;
-  bottom: 30px;
-  left: 20px;  /* padding-left: 20px; */
-  width: 300px;
-  border-radius: 5px;
-  display: block;  /* color: #333; */
-  color: white;
-  -webkit-text-stroke: 0.2px black;  /* background-color: rgba(223, 223, 223, 0.5); */
-  font-size: 16px;  /* box-shadow: 0 0 8px #666666; */
-}
 
-#info-box div {
-  padding-left: 20px;
-  line-height: 20px;
-}
 
-#info-box .info-title {
-  padding-left: 0;
-  font-size: 18px;
-  font-weight: bold;
-  line-height: 24px;
-}
 
-/* info box end */
+
+
 #estimation-wrapper {
 
   /* background-color: red; */
@@ -254,3 +232,39 @@ input[type=button] {
   transform: translate(-50%, -50%); /*使元素本身向左移动宽度的一半*/
   margin: 0 auto;
 }
+
+
+#legendholder {
+  padding-top: 20px;
+}
+
+#legendholder button, #year-panel button {
+  margin: 20px;
+  padding: 6px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  color: white;
+  background-color: #4CAF50;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 0 8px #666666;
+  margin: 0 auto;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#legendholder button:hover {
+  background-color: #45a049;
+}
+
+#year-panel {
+      text-align: center;
+      margin-top: 10px;
+}
+#year-panel button {
+  background-color: #555;
+}
+
+
+
+

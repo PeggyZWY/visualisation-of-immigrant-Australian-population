@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="/static/css/normalize-mix.css">
+<link rel="stylesheet" type="text/css" href="/static/css/cartogram.css">
+<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+<script src="/static/js/jquery-3.4.1.min.js"></script>
+
+<body>
+
+<div id="legendholder">
+  <button id="click_to_run" onclick="doUpdate()">
+          View by Population
+  </button>
+  <button id="click_to_normal" onclick="doNormal()">
+        View Normal
+  </button>
+  <button id="refresh">
+        Refresh
+  </button>
+</div>
+
+
+
+<div id="chart"></div>
+
+
+
+    <button id="choose-area-button">Choose Origin Country</button>
+
+ <div id="choose-area-panel-cartogram">
+        <div href="#" id="close"></div>
+        <form>
+<span>Origin</span>
+<div style="display: none">
+
+            <label for="origin-category">Category</label>
+            <select id="origin-category" name="origin-category">
+              <option value="country">country</option>
+              <option value="continent">continent</option>
+              <option value="world">whole world</option>
+            </select>
+          </div>
+
+            <label for="origin-name" id='testla'>Name</label>
+            <input type="text" id="origin-name" name="origin-name">
+
+<div style="display: none">
+
+
+
+
+
+            <div class="divide"></div>
+
+
+            <span>Australia</span>
+            <label for="au-category">Category</label>
+            <select id="au-category" name="au-category">
+                <option value="country">whole Australia</option>
+                <option value="state">state</option>
+                <option value="sa2">SA2 Area</option>
+            </select>
+
+            <label for="au-name">Name</label>
+            <!--input type="text" id="au-name" name="au-name"-->
+
+            <input type="text" list="au-name-options" id="au-name" name="au-name">
+            <datalist id="au-name-options">
+            </datalist>
+            </div>
+
+            <label for="au-year">Year</label>
+            <select id="au-year" name="au-year">
+                <option value="2001">2001</option>
+                <option value="2006">2006</option>
+                <option value="2011">2011</option>
+                <option value="2016">2016</option>
+            </select>
+
+            <input id="choose-panel-confirm" type="button" value="Confirm">
+            <input id="choose-panel-close" type="button" value="Close">
+        </form>
+    </div>
+
+
+
+<script src="/static/js/d3.v3.min.js"></script>
+<script src="/static/js/topojson.js"></script>
+<script src="/static/js/cartogram.js"></script>
+<script src="/static/map/topo_states.js"></script>
+<script src="/static/js/myCartogram.js"></script>
+
+</body>
+</html>

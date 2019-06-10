@@ -2,7 +2,7 @@
   become: yes
   shell: "{{ item }}"
   with_items:
-    - curl -X PUT http://wenyi:cloud@localhost:5984/population
+    - curl -X PUT http://wenyi:cloud@localhost:5984/all_data
     - curl -X PUT http://wenyi:cloud@localhost:5984/_replicator
 
 
@@ -10,4 +10,4 @@
   become: yes
   command: "{{ item }}"
   with_items:
-    - curl -X POST http://wenyi:cloud@localhost:5984/_replicator -d '{"source":"http://wenyi:cloud@localhost:5984/population", "target":"http://wenyi:cloud@{{replica}}:5984/population", "continuous":true}' -H "Content-Type:application/json"
+    - curl -X POST http://wenyi:cloud@localhost:5984/_replicator -d '{"source":"http://wenyi:cloud@localhost:5984/all_data", "target":"http://wenyi:cloud@{{replica}}:5984/all_data", "continuous":true}' -H "Content-Type:application/json"

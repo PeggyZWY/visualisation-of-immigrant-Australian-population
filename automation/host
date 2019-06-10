@@ -1,9 +1,9 @@
 [webserver]
-103.6.254.170
+103.6.254.212
 [dbserver1]
-103.6.254.194
+103.6.254.98
 [dbserver2]
-103.6.254.142
+45.113.235.222
 
 [all:vars]
 ansible_ssh_user=ubuntu
