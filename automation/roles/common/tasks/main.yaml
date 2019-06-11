@@ -22,7 +22,7 @@
     - pytz==2018.4
 
 
-- name: Create CouchDB in docker
+- name: Create CouchDB container in docker
   become: yes
   command: "{{ item }}"
   with_items:

@@ -2,7 +2,6 @@ version: "3.3"
 
 services:
   api:
-    #restart: always
     stdin_open: true
     tty: true
     build: .
@@ -14,5 +13,4 @@ services:
       - ./supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
     ports:
       - "80:80"
-    #command: '/bin/bash'
     command: '/usr/bin/supervisord'

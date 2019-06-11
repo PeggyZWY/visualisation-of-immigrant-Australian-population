@@ -1,0 +1,46 @@
+1)
+view name: country-state-year
+
+map function:
+function (doc) {
+  emit([doc.ori_country, doc.au_state, doc.year], doc.population);
+}
+
+reduce function:
+the built-in '_sum' function
+
+
+2)
+view name: sa2-country-year
+
+map function:
+function (doc) {
+  emit([doc.au_sa2_name, doc.ori_country, doc.year], doc.population);
+}
+
+reduce function:
+the built-in '_sum' function
+
+
+3)
+view name: state-country-year
+
+map function:
+function (doc) {
+  emit([doc.au_state, doc.ori_country, doc.year], doc.population);
+}
+
+reduce function:
+the built-in '_sum' function
+
+
+4)
+view name: year-country-state
+
+map function:
+function (doc) {
+  emit([doc.year, doc.ori_country, doc.au_state], doc.population);
+}
+
+reduce function:
+the built-in '_sum' function

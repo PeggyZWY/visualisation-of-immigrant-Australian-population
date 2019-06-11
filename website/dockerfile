@@ -29,5 +29,4 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY gunicorn.conf /etc/supervisor/conf.d/gunicorn.conf
 
 # run sh. Start processes in docker-compose.yml
-#CMD ["/usr/bin/supervisord"]
 CMD ["/bin/bash"]

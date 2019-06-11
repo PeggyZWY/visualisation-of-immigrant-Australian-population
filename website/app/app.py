@@ -36,34 +36,26 @@ headers = {
 def index():
     return render_template('index.html')
 
+
 @app.route('/estimation')
 def estimation():
     return render_template('estimation.html')
 
-@app.route('/test')
-def test():
-    return render_template('test.html')
 
 @app.route('/cartogram')
 def cartogram():
     return render_template('cartogram.html')
-
-# @app.route('/cartogram_with_params')
-# def cartogram_with_params():
-#     return render_template('cartogram_with_params.html', year=)
 
 
 @app.route('/get_VIC_topo')
 def get_VIC_topo():
     return render_template('test_VIC.html')
 
+
 # http://127.0.0.1/getjson/country/all/country/all
 # /getjson/country/all/country/all
 @app.route('/getjson/<ori_category>/<ori_name>/<au_category>/<au_name>')
 def getjson(ori_category, ori_name, au_category, au_name):
-    # database = 'test'
-    # database = 'data_01_06'
-    # database = 'data_01_to_16'
     database = 'all_data'
     view_index = 'year-country-state'
     need_group = '&group=true'
@@ -143,103 +135,6 @@ def getjson(ori_category, ori_name, au_category, au_name):
         ret[str(year)]['data'].append(entry)
 
     return json.dumps(ret)
-
-
-
-
-@app.route('/get_initial_json')
-def get_initial_json():
-    url = 'http://wenyi:cloud@localhost:5984/test/_design/view1/_view/year-country-state?stable=false&update=false&group=true&group_level=2'
-
-    response = requests.get(url, headers=headers)
-    response_json = json.loads(response.text)
-    data = response_json['rows']
-
-    existing_years = []
-    ret = {}
-    for key_value in data:
-        year = key_value['key'][0]
-        if year not in existing_years:
-            existing_years.append(year)
-            ret[str(year)] = {'data': []}
-        entry = []
-        entry_item_1 = {}
-        entry_item_1['name'] = key_value['key'][1]
-        entry_item_1['value'] = int(key_value['value'])
-        entry.append(entry_item_1)
-        entry_item_2 = {}
-        entry_item_2['name'] = "Australia"
-        entry.append(entry_item_2)
-        ret[str(year)]['data'].append(entry)
-
-    return json.dumps(ret)
-
-
-
-@app.route('/get_all_countries_to_one_state')
-def get_all_countries_to_one_state():
-    url = 'http://wenyi:cloud@localhost:5984/test/_design/view1/_view/state-country-year?stable=false&update=false&group=true&startkey=["VIC"]&endkey=["WA"]'
-
-    response = requests.get(url, headers=headers)
-    response_json = json.loads(response.text)
-    data = response_json['rows']
-
-    existing_years = []
-    ret = {}
-    for key_value in data:
-        year = key_value['key'][2]
-        if year not in existing_years:
-            existing_years.append(year)
-            ret[str(year)] = {'data': []}
-        entry = []
-        entry_item_1 = {}
-        entry_item_1['name'] = key_value['key'][1]
-        entry_item_1['value'] = int(key_value['value'])
-        entry.append(entry_item_1)
-        entry_item_2 = {}
-        entry_item_2['name'] = key_value['key'][0]
-        entry.append(entry_item_2)
-        ret[str(year)]['data'].append(entry)
-
-    print(ret)
-    return json.dumps(ret)
-
-
-
-
-
-@app.route('/getjsonData')
-def getjsonData():
-    data = {'name': 'cats', 'attribute': 'cute'}
-    data = json.dumps(data)
-    return data
-
-# 可以用python访问，但是查询很不灵活，特别是key不能用数组形式，决定了我不能用这个
-@app.route('/get_couchdb_data')
-def get_couchdb_data():
-    server = couchdb.Server('http://wenyi:cloud@localhost:5984/')
-    db = server['test']
-
-    #state-to-continent
-    #country-to-state
-    count = 0
-    dict = {}
-    dict['data'] = []
-    for item in db.view('view1/country-to-state', group=True, group_level=1, stable=False, update=False, key="['Afghanistan']"):
-        if count < 2:
-            print(item.key, item.value)
-            entry = []
-            entry_item_1 = {}
-            entry_item_1['name'] = item.key[0]
-            entry_item_1['value'] = int(item.value)
-            entry.append(entry_item_1)
-            entry_item_2 = {}
-            entry_item_2['name'] = "Australia"
-            entry.append(entry_item_2)
-            dict['data'].append(entry)
-            count += 1
-        else:
-            break
 
 
 if __name__ == '__main__':
