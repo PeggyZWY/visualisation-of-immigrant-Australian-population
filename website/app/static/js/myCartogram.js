@@ -56,117 +56,11 @@ var number_formatter = d3.format("0,000");
 
 var pop_data = d3.map();
 
-// var carto;
-
 var carto = d3.cartogram()
   .projection(projection)
   .properties(function(d) {
     return d.properties;
   });
-
-
-// var statesData2016 = {
-//     "code": "success",
-//     "data": [{
-//         "STATE_CODE": "STATE_CODE",
-//         "STATE_NAME": "STATE_NAME",
-//         "POP": "POP"
-//     }, {
-//         "STATE_CODE": "1",
-//         "STATE_NAME": "New South Wales",
-//         "POP": "100"
-//     }, {
-//         "STATE_CODE": "2",
-//         "STATE_NAME": "Victoria",
-//         "POP": "200"
-//     }, {
-//         "STATE_CODE": "3",
-//         "STATE_NAME": "Queensland",
-//         "POP": "300"
-//     }, {
-//         "STATE_CODE": "4",
-//         "STATE_NAME": "South Australia",
-//         "POP": "400"
-//     }, {
-//         "STATE_CODE": "5",
-//         "STATE_NAME": "Western Australia",
-//         "POP": "500"
-//     }, {
-//         "STATE_CODE": "6",
-//         "STATE_NAME": "Tasmania",
-//         "POP": "600"
-//     }, {
-//         "STATE_CODE": "7",
-//         "STATE_NAME": "Northern Territory",
-//         "POP": "700"
-//     }, {
-//         "STATE_CODE": "8",
-//         "STATE_NAME": "Australian Capital Territory",
-//         "POP": "800"
-//     }]
-// }
-
-
-// d3.json("src/data/test_data_2016.json", function(data) {
-//   console.log(data.data);
-
-
-  // statesData2016.data.forEach(function(d) {
-  //   // console.log(d);
-  //   pop_data.set(d.STATE_CODE, [d.STATE_NAME, d.POP]);
-  // });
-// })
-
-
-
-
-
-// topology = topoStates;
-// geometries = topology.objects['collection'].geometries;
-
-// var features = carto.features(topology, geometries);
-// // 定义地理路径生成器
-// var path = d3.geo.path()
-//   .projection(projection);
-
-// console.log(topology);
-// console.log(geometries);
-// console.log(features);
-
-//add this to make up for counties with a space in the name: .replace(/\s+/g, '')
-// counties = counties.data(features)
-//   .enter()
-//   .append("path")
-//   .attr("class", "county")
-//   .attr("id", function(d) {
-//     return d.properties.name.replace(/\s+/g, '');
-//   })
-//   .attr("fill", "white")
-//   .attr("d", path)
-//   .attr("stroke", "black")
-//   .attr("stroke-width", "0.3px")
-//   .on("mouseover", function(d) {
-//     // console.log(d);
-//     // console.log(pop_data.get(d.properties['GEOID10']));
-
-//     d3.selectAll("#" + d.properties.name.replace(/\s+/g, '')).style("fill", "#99CC33");
-//     tooltip_div.transition()
-//       .duration(200)
-//       .style("opacity", 0.9)
-//       .style("border", "1px black solid")
-//     tooltip_div.html(d.properties.name + "<br>" +
-//         number_formatter(pop_data.get(d.properties['STATE_CODE'])[1]))
-//       .style("left", (d3.event.pageX) + "px")
-//       .style("top", (d3.event.pageY - 28) + "px")
-//       .style("height", "50px");
-//   })
-//   .on("mouseout", function(d) {
-//     d3.selectAll("#" + d.properties.name.replace(/\s+/g, '')).style("fill", "white");
-//     tooltip_div.transition()
-//       .duration(500)
-//       .style("opacity", 0);
-//   });
-
 
 function doNormal() {
   d3.select("#click_to_normal").text("thinking...");
@@ -219,7 +113,6 @@ $("#choose-area-button").click(function(event) {
 });
 
 
-
 var firstTime = true;
 
 $("#choose-panel-confirm").click(function(event) {
@@ -242,8 +135,6 @@ $("#choose-panel-confirm").click(function(event) {
   var url = '/getjson/' + originCategory + '/' + originName + '/' + auCategory + '/' + auName;
 
   $.getJSON(url, function(result) {
-    tbp = result;
-    console.log(tbp);
     var dataArr = Object.values(result)[0]['data'];
     console.log(dataArr);
     var statesDataThisYear = {
@@ -274,15 +165,10 @@ pop_data = d3.map();
     geometries = topology.objects['collection'].geometries;
 
     features = carto.features(topology, geometries);
-    // 定义地理路径生成器
     path = d3.geo.path()
       .projection(projection);
 
-    // console.log(topology);
-    // console.log(geometries);
-    // console.log(features);
-
-    //add this to make up for counties with a space in the name: .replace(/\s+/g, '')
+    // add this to make up for counties with a space in the name: .replace(/\s+/g, '')
     counties = counties.data(features)
       .enter()
       .append("path")
@@ -295,9 +181,6 @@ pop_data = d3.map();
       .attr("stroke", "black")
       .attr("stroke-width", "0.3px")
       .on("mouseover", function(d) {
-        // console.log(d);
-        // console.log(pop_data.get(d.properties['GEOID10']));
-
         d3.selectAll("#" + d.properties.name.replace(/\s+/g, '')).style("fill", "#99CC33");
         tooltip_div.transition()
           .duration(200)
@@ -320,9 +203,6 @@ pop_data = d3.map();
 });
 
 
-
-var tbp;
-
 $("#choose-panel-close").click(function(event) {
   console.log("click close");
   $("#choose-area-panel-cartogram").css("visibility", "hidden");
@@ -338,5 +218,4 @@ $("#close").click(function(event) {
 $("#refresh").click(function() {
   window.location.reload();
 })
-
 
