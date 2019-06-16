@@ -47,10 +47,8 @@ years = [2006, 2001]
 for year in years:
     doc_list = []
     china_dict = {}
-    # for i in range(1):
     for i in range(33):
         dir_name = '01_06_data/' + str(year) + '-01-01_-_' + str(year) + '-01-01.csv (' + str(i) + ')'
-        # print(dir_name)
         data_file = glob.glob(dir_name + '/*.csv')[0]
         is_header = True
         print('start: ' + data_file)
@@ -106,13 +104,6 @@ for year in years:
     for value in china_dict.values():
         doc_list.append(value)
     db.update(doc_list)
-
-
-'''
-function (doc) {
-  emit([doc.year, doc.ori_country, doc.au_sa2_name], doc.population);
-}
-'''
 
 
 end_time = time.time()

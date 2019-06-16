@@ -1,0 +1,3 @@
+There are two factors influencing on the population growth: natural increase and net overseas migration (NOM). The [dataset](https://www.abs.gov.au/ausstats/abs@.nsf/latestProducts/3222.0Media%20Release12017%20(base)%20-%202066) estimated that NOM will contribute 60% of population growth from 2018 to 2027, and 64% from 2028 to 2041.  
+  
+Therefore, I could calculate the increase between every five years and then multiple it with the contribution percentage of NOM for that period to obtain the increased immigrant population. And then after the increased number is added to the existing immigrant population, the projected immigrant population could be obtained.

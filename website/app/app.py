@@ -9,10 +9,10 @@ app = Flask(__name__)
 first_country = 'Afghanistan'
 last_country = 'Yemen'
 
-states_list = ['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA'] # must keep this order
+states_list = ['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA'] # must keep this alphabet order
 
 sa2_list = []
-
+# construct sa2_list
 with open('static/map/sa2_list_dict.js') as f:
     content = f.read()
     content = json.loads(content)
@@ -20,7 +20,7 @@ with open('static/map/sa2_list_dict.js') as f:
     for i in range(length):
         sa2_list.append(content[str(i)])
 
-
+# HTTP headers
 headers = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/json',
     'Accept-Encoding': 'gzip, deflate, br',
@@ -47,15 +47,10 @@ def cartogram():
     return render_template('cartogram.html')
 
 
-@app.route('/get_VIC_topo')
-def get_VIC_topo():
-    return render_template('test_VIC.html')
-
-
-# http://127.0.0.1/getjson/country/all/country/all
-# /getjson/country/all/country/all
+# this will be queried from index page or cartogram page
 @app.route('/getjson/<ori_category>/<ori_name>/<au_category>/<au_name>')
 def getjson(ori_category, ori_name, au_category, au_name):
+    # some default value for parameters in the querying url to CouchDB
     database = 'all_data'
     view_index = 'year-country-state'
     need_group = '&group=true'
@@ -63,10 +58,12 @@ def getjson(ori_category, ori_name, au_category, au_name):
     select_one = ''
     select_many = ''
 
+    # change some parameters according to this scenario: all origin countries to whole Australia
     if ori_category == 'country' and ori_name == 'all' and au_category == 'country':
         view_index = 'year-country-state'
         group_level = '&group_level=2'
 
+    # change some parameters according to this scenario: all origin countries to one Australian state
     if ori_category == 'country' and au_category == 'state' and au_name != 'all' and au_name not in ['2001', '2006', '2011', '2016']:
         state_name = au_name
         view_index = 'state-country-year'
@@ -76,6 +73,7 @@ def getjson(ori_category, ori_name, au_category, au_name):
         else:
             select_many = '&startkey=["' + state_name + '"]&endkey=["' + states_list[state_index+1] + '"]'
 
+    # change some parameters according to this scenario: all origin countries to one Australian SA2 area
     if ori_category == 'country' and au_category == 'sa2':
         sa2_name = au_name
         view_index = 'sa2-country-year'
@@ -85,28 +83,26 @@ def getjson(ori_category, ori_name, au_category, au_name):
         else:
             select_many = '&startkey=["' + sa2_name + '"]&endkey=["' + sa2_list[sa2_index+1] + '"]'
 
-    if ori_category == 'country' and au_category == 'state' and au_name == 'all':
-        country_name = ori_name
-        view_index = 'country-state-year'
-        select_many = '&startkey=["' + country_name + '","ACT",2001]&endkey=["' + country_name + '","WA",2016]'
-
+    # change some parameters according to this scenario: for searching from cartogram
     if ori_category == 'country' and au_category == 'state' and au_name in ['2001', '2006', '2011', '2016']:
         view_index = 'year-country-state'
         country_name = ori_name
         search_year = au_name
         select_many = '&startkey=[' + search_year + ',"' + country_name + '","ACT"]&endkey=[' + search_year + ',"' + country_name + '","WA"]'
 
+    # form the querying url to CouchDB with the just updated parameters
     url = 'http://wenyi:cloud@localhost:5984/' + database + '/_design/view1/_view/' + view_index + '?stable=false&update=false' + need_group + group_level + select_one + select_many
-# &startkey=[2001,"Cambodia","ACT"]&endkey=[2001,"Cambodia","WA"]
     print(url)
 
+    # send HTTP request to query CouchDB
     response = requests.get(url, headers=headers)
     response_json = json.loads(response.text)
     data = response_json['rows']
 
     existing_years = []
     ret = {}
-    for key_value in data: # {"key":[2001,"Cambodia","ACT"],"value":221}
+    # form json which will be responsed to front-end according to different queries
+    for key_value in data:
         if view_index == 'state-country-year' or view_index == 'sa2-country-year' or view_index == 'country-state-year':
             year = key_value['key'][2]
         else:

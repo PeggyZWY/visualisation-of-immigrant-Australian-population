@@ -1,3 +1,5 @@
+// the visualisation library used in this JavaScript is ECharts (https://echarts.apache.org/en/index.html)
+
 $('#estimation-wrapper').width(window.innerWidth);
 $('#estimation-wrapper').height(window.innerHeight);
 

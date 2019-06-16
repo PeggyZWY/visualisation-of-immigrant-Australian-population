@@ -1,3 +1,5 @@
+// the visualisation libraries used in this JavaScript are D3.js (https://d3js.org/) and cartogram.js (http://prag.ma/code/d3-cartogram/cartogram.js)
+
 var stateDict = {
   'NSW': [1, 'New South Wales'],
   'VIC': [2, 'Victoria'],
@@ -62,6 +64,7 @@ var carto = d3.cartogram()
     return d.properties;
   });
 
+// show normal map
 function doNormal() {
   d3.select("#click_to_normal").text("thinking...");
 
@@ -78,25 +81,22 @@ function doNormal() {
     .attr("d", path);
 };
 
+// show cartogram
 function doUpdate() {
   d3.select("#click_to_run").text("thinking...");
-  console.log('mark 111111');
   carto.value(function(d) {
     console.log(+pop_data.get(d.properties['STATE_CODE'])[1])
     return +pop_data.get(d.properties['STATE_CODE'])[1];
   });
 
-console.log('mark 222222');
   if (carto_features == undefined) {
     carto_features = carto(topology, geometries).features;
   }
 
-console.log('mark 333333');
   counties.data(carto_features)
     .text(function(d) {
       return d.properties.STATE_CODE;
     })
-console.log('mark 444444');
 
   counties.transition()
     .duration(1500)
@@ -104,7 +104,6 @@ console.log('mark 444444');
       d3.select("#click_to_run").text("View by Population");
     })
     .attr("d", carto.path);
-   console.log('mark 555555');
 }
 
 $("#choose-area-button").click(function(event) {
@@ -113,13 +112,10 @@ $("#choose-area-button").click(function(event) {
 });
 
 
-var firstTime = true;
-
 $("#choose-panel-confirm").click(function(event) {
   console.log("click confirm");
   formData = $('form').serializeArray();
   console.log(formData);
-  console.log(JSON.stringify(formData, null, 4));
   $("#choose-area-panel-cartogram").css("visibility", "hidden");
   $("#choose-area-button").css("visibility", "visible");
 
@@ -132,6 +128,29 @@ $("#choose-panel-confirm").click(function(event) {
 
   console.log(originCategory, originName, auCategory, auName, auYear);
 
+  // before querying, check whether the countryName is valid (within the droplist options)
+  var countries, countriesLen;
+  if (auYear == '2001' || auYear == '2006') {
+    countries = year_country_dict['01_06'];
+  } else {
+    countries = year_country_dict['11_16'];
+  }
+
+  countriesLen = countries.length;
+  var countryNameIsValid = false;
+  for (var i = 0; i < countriesLen; i++) {
+    if (originName == countries[i]) {
+      countryNameIsValid = true;
+    }
+  }
+  // if countryName is not valid, give alert and do not submit query to database
+  if (!countryNameIsValid) {
+    alert('The country you\'ve chosen is not valid. Please check valid countries in the droplist.');
+    return;
+  }
+
+  // if countryName is valid, continue to query database
+  // form the querying url
   var url = '/getjson/' + originCategory + '/' + originName + '/' + auCategory + '/' + auName;
 
   $.getJSON(url, function(result) {
@@ -142,7 +161,6 @@ $("#choose-panel-confirm").click(function(event) {
     }
     for (var i = 0; i < dataArr.length; i++) {
       var dataInOneState = dataArr[i];
-      // console.log(dataInOneState);
       var abbr = dataInOneState[1]['name'];
       var tempDict = {};
       tempDict['STATE_CODE'] = stateDict[abbr][0];
@@ -154,12 +172,8 @@ $("#choose-panel-confirm").click(function(event) {
 
 pop_data = d3.map();
     statesDataThisYear.data.forEach(function(d) {
-      // console.log(d);
       pop_data.set(d.STATE_CODE, [d.STATE_NAME, d.POP]);
     });
-
-    if (firstTime) {
-      // firstTime = false;
 
     topology = topoStates;
     geometries = topology.objects['collection'].geometries;
@@ -198,7 +212,6 @@ pop_data = d3.map();
           .duration(500)
           .style("opacity", 0);
       });
-    }
   });
 });
 
@@ -217,5 +230,27 @@ $("#close").click(function(event) {
 
 $("#refresh").click(function() {
   window.location.reload();
-})
+});
+
+// the droplist will change with the category
+$("#au-year").change(function() {
+  console.log('change');
+  var formData = $('form').serializeArray();
+  var auYear = formData[4]['value'];
+  console.log(formData);
+  $("#origin-name-options").empty();
+  var countries, countriesLen;
+  if (auYear == '2001' || auYear == '2006') {
+    countries = year_country_dict['01_06'];
+  } else {
+    countries = year_country_dict['11_16'];
+  }
+  countriesLen = countries.length;
+  for (var i = 0; i < countriesLen; i++) {
+    $("#origin-name-options").append('<option value="' + countries[i] + '">' + countries[i] + '</option>');
+  }
+  $('#origin-name').attr('placeholder', countries[0]);
+});
+
+$("#au-year").change();
 

@@ -29,6 +29,8 @@
 
 /* zoom panel end */
 
+
+
 /* choose area start */
 #choose-area-button, #go-to-estimation, #go-to-cartogram {
   position: absolute;
@@ -173,8 +175,9 @@ input[type=button] {
 }
 
 /* close symbol (×) end */
-
 /* choose area end */
+
+
 
 /* github corner start */
 .github-corner:hover .octo-arm {
@@ -211,28 +214,21 @@ input[type=button] {
 
 
 
-
-
-
+/* css for the line chart in 'estimation.html' start */
 #estimation-wrapper {
-
-  /* background-color: red; */
   position: relative;
   padding-top: 30px;
 }
 
 #estimation-line-chart {
-
-  /* background-color: yellow; */
   position: absolute;
   top: 50%;
-  left: 50%;  /*定位margin-left:50%的位置*/
+  left: 50%;
   -webkit-transform: translate(-50%, -50%); /*Safari,Chrome*/
   -moz-transform: translate(-50%, -50%);  /*IE9+*/
-  transform: translate(-50%, -50%); /*使元素本身向左移动宽度的一半*/
+  transform: translate(-50%, -50%);
   margin: 0 auto;
 }
-
 
 #legendholder {
   padding-top: 20px;
@@ -264,7 +260,4 @@ input[type=button] {
 #year-panel button {
   background-color: #555;
 }
-
-
-
-
+/* css for the line chart in 'estimation.html' end */

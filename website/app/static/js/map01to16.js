@@ -421,6 +421,34 @@ $("#choose-panel-confirm").click(function(event) {
   }
   console.log(originCategory, originName, auCategory, auName);
 
+  // before querying, check whether the auName is valid (within the droplist options)
+  var auNameIsValid = false;
+  if (auCategory == 'country') {
+    auNameIsValid = true;
+  } else if (auCategory == 'state') {
+    var states = Object.keys(statesDict),
+      statesLen = states.length;
+    for (var i = 0; i < statesLen; i++) {
+      if (auName == states[i]) {
+        auNameIsValid = true;
+      }
+    }
+  } else if (auCategory == 'sa2') {
+    var sa2 = Object.keys(sa2_dict),
+      sa2Len = sa2.length;
+    for (var i = 0; i < sa2Len; i++) {
+      if (auName == sa2[i]) {
+        auNameIsValid = true;
+      }
+    }
+  }
+  // if auName is not valid, give alert and do not submit query to database
+  if (!auNameIsValid) {
+    alert('The ' + auCategory + ' name you\'ve chosen is not valid. Please check valid options in the droplist.');
+    return;
+  }
+
+  // if auName is valid, continue to query database
   // form the querying url
   var url = '/getjson/' + originCategory + '/' + originName + '/' + auCategory + '/' + auName;
   console.log(url);
@@ -624,17 +652,25 @@ $("#au-category").change(function() {
     $('#au-name').attr('placeholder', 'whole Australia');
     $('#au-name').attr('readonly', 'readonly');
   } else {
-    $('#au-name').attr('placeholder', '');
     $('#au-name').removeAttr('readonly');
 
     $("#au-name-options").empty();
+    var firstEle = true;
     if (auCategory == 'state') {
       Object.keys(statesDict).forEach(function(key) {
         $("#au-name-options").append('<option value="' + key + '">' + statesDict[key] + '</option>');
+        if (firstEle) {
+          $('#au-name').attr('placeholder', key);
+          firstEle = false;
+        }
       });
     } else {
       Object.keys(sa2_dict).forEach(function(key) {
         $("#au-name-options").append('<option value="' + key + '">' + sa2_dict[key] + '</option>');
+        if (firstEle) {
+          $('#au-name').attr('placeholder', key);
+          firstEle = false;
+        }
       });
     }
   }

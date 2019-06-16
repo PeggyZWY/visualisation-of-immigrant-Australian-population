@@ -30,10 +30,7 @@ years = [2016, 2011]
 continents = ['Asia', 'Africa', 'Europe', 'North America', 'South America', 'Oceania']
 states = ['NSW', 'VIC', 'QLD', 'SA', 'WA', 'TAS', 'NT', 'ACT']
 
-# continents = ['Asia', 'Europe']
-# states = ['WA', 'VIC']
 
-# try:
 for year in years:
     for continent in continents:
         for state in states:
@@ -65,8 +62,6 @@ for year in years:
                             doc_list.append(doc)
                 db.update(doc_list)
                 print('finished: ' + filename)
-# except:
-    # print('Error happens in: ' + str(year) + ', ' + continent + ', ' + state)
 
 
 end_time = time.time()
