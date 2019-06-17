@@ -666,7 +666,7 @@ $("#au-category").change(function() {
       });
     } else {
       Object.keys(sa2_dict).forEach(function(key) {
-        $("#au-name-options").append('<option value="' + key + '">' + sa2_dict[key] + '</option>');
+        $("#au-name-options").append('<option value="' + key + '">' + '</option>');
         if (firstEle) {
           $('#au-name').attr('placeholder', key);
           firstEle = false;
